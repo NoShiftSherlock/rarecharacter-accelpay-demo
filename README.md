@@ -1,6 +1,6 @@
 # Rare Character Whiskey x AccelPay (private sales demo)
 
-**This is a private sales demo, not a live store.** It uses Rare Character Whiskey's name, logos, product images and copy to show the brand what its own site looks like with AccelPay checkout built in. All marks belong to their owners (Rare Character Whiskey Company, ReserveBar, Gopuff, DoorDash). Please do not share or promote it publicly. No order can be placed and no payment is taken.
+**This is a private sales demo, not a live store.** It uses Rare Character Whiskey's name, logos, product images and copy to show the brand its own Squarespace site with AccelPay checkout added (the brand has no online store today). All marks belong to their owners (Rare Character Whiskey Company, ReserveBar, Gopuff, DoorDash). Please do not share or promote it publicly. No order can be placed and no payment is taken.
 
 Live: https://noshiftsherlock.github.io/rarecharacter-accelpay-demo/
 
@@ -14,7 +14,7 @@ Live: https://noshiftsherlock.github.io/rarecharacter-accelpay-demo/
 
 Real:
 - Products, bottle images, ABV and tasting notes: Rare Character's ReserveBar.com listings (checked 24 Oct 2026).
-- Retailers and prices: the LiquidCommerce retailer feed. Vista Wine & Spirits (Santee, CA), Liquor Barn (Wheeling, IL) and Bottle Republic (Somerset, NJ) carry these bottles at the prices shown (feed synced Sep 2026).
+- Retailers and prices: the LiquidCommerce retailer feed. Liquor Barn (Wheeling, IL) and Bottle Republic (Somerset, NJ) carry these bottles at the prices shown (feed synced Sep 2026). Kentucky Malt 2011 and Maple Cask Bourbon show as connected to retailers at launch, at the ReserveBar.com price.
 - Brand imagery and logo: rarecharacterwhiskey.com.
 
 Illustrative:

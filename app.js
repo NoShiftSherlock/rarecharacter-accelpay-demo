@@ -21,7 +21,6 @@
   // Real network retailers that carry Rare Character today. `metro` is the
   // set of ZIP3 prefixes treated as local for same-day delivery.
   const RETAILERS = {
-    'r-vista': { id: 'r-vista', name: 'Vista Wine & Spirits', city: 'Santee, CA', st: 'CA', metro: ['919', '920', '921'] },
     'r-lbarn': { id: 'r-lbarn', name: 'Liquor Barn', city: 'Wheeling, IL', st: 'IL', metro: ['600', '601', '602', '603', '604', '605', '606'] },
     'r-brep':  { id: 'r-brep',  name: 'Bottle Republic', city: 'Somerset, NJ', st: 'NJ', metro: ['070', '071', '072', '073', '077', '079', '088', '089'] }
   };
@@ -30,9 +29,11 @@
   const VARIANTS = {
     'cs-bourbon-s4b6': [{ retailerId: 'r-brep', price: 9999, stock: 86 }],
     'cs-rye-s4b7':     [{ retailerId: 'r-brep', price: 9999, stock: 153 }],
-    'amburana-rye-ii': [{ retailerId: 'r-lbarn', price: 15999, stock: 5 }, { retailerId: 'r-vista', price: 11299, stock: 0 }],
-    'malt-2011-s3b7':  [{ retailerId: 'r-vista', price: 19299, stock: 3 }],
-    'maple-s2b10':     [{ retailerId: 'r-vista', price: 12699, stock: 0 }]
+    'amburana-rye-ii': [{ retailerId: 'r-lbarn', price: 15999, stock: 5 }],
+    // No network retailer other than Bottle Nexus's own stocks these two, so
+    // they show as connected to retailers at launch, at the ReserveBar.com price.
+    'malt-2011-s3b7':  [],
+    'maple-s2b10':     []
   };
 
   const CATALOG = {
@@ -107,7 +108,7 @@
     const inStockReal = out.filter(o => o.stock > 0).length;
     if (!inStockReal) {
       out.push({ type: 'shipping', key: 'r-local-' + a.st + ':shipping', retailerId: 'r-local-' + a.st,
-        name: 'Licensed retailer in ' + (STATE_NAMES[a.st] || a.st), city: 'Assigned at launch', price: p.price,
+        name: 'Licensed retailer in ' + (STATE_NAMES[a.st] || a.st), city: (VARIANTS[id] || []).length ? 'Assigned at launch' : 'Connected to retailers at launch', price: p.price,
         stock: 24, fee: SHIP_FEE, eta: 'Ships in 2 to 5 business days', real: false });
     }
     return out;
@@ -251,6 +252,7 @@
           '<h1>', esc(p.name), '</h1>',
           '<div class="price">', state.address ? money(unit) : 'From ' + money(fromPrice(id)),
             '<span class="unit">750 ML · ', p.abv, ' ABV · ', p.type, '</span></div>',
+          (VARIANTS[id] || []).length ? '' : '<p class="fine" style="margin-top:6px">Connected to retailers at launch. Price shown is the ReserveBar.com price.</p>',
           '<dl class="notes"><dt>Nose</dt><dd>', p.nose, '</dd><dt>Palate</dt><dd>', p.palate, '</dd><dt>Finish</dt><dd>', p.finish, '</dd></dl>',
           addressBlock(),
           state.address ? (opts.length ? [
@@ -392,7 +394,7 @@
       const lo = fromPrice(id);
       return '<a class="card" href="product.html?p=' + id + '"><div class="ci"><img src="' + p.image + '" alt="' + esc(p.name) + '" loading="lazy"></div>' +
         '<div class="cs">' + esc(p.series) + '</div><div class="cn">' + esc(p.name) + (p.batch ? ' <span>' + p.batch + '</span>' : '') + '</div>' +
-        '<div class="cp">From ' + money(lo) + '</div></a>'; }).join('');
+        '<div class="cp">' + ((VARIANTS[id] || []).length ? 'From ' + money(lo) : money(lo) + ' · connected to retailers at launch') + '</div></a>'; }).join('');
   }
 
   function renderAll() { renderHeader(); renderProduct(); renderDrawer(); renderCheckout(); }
